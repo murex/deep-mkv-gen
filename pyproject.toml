@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deep-mkv-gen"
+description = "Reusable deep MKV training runtime, evaluation helpers, and terminal-gradient providers."
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+keywords = [
+    "deep-mkv",
+    "generative-modeling",
+    "optimal-transport",
+    "pytorch",
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24",
+    "torch>=2.1",
+    "POT>=0.9",
+]
+
+[project.optional-dependencies]
+geomloss = [
+    "geomloss>=0.2.6",
+]
+test = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "deep_mkv_gen._version.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.coverage.run]
+source = ["deep_mkv_gen"]
+
+[tool.coverage.report]
+skip_covered = false
+show_missing = true
